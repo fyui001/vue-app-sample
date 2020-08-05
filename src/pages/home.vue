@@ -58,7 +58,6 @@
       return {
         slide: 0,
         sliding: null,
-        img1: img1,
       }
     },
     components: {

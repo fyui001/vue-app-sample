@@ -1,9 +1,13 @@
 <template>
   <div>
-    <b-navbar type="dark" variant="warning" toggleable="lg">
+    <b-navbar type="dark" variant="info" toggleable="lg">
+      <b-button v-b-toggle.sidebar-backdrop variant="info">
+        <b-icon icon="list"></b-icon>
+      </b-button>
       <b-navbar-brand href="/">
         Vue.jsサンプル
       </b-navbar-brand>
+      <Sidebar />
         <b-navbar-toggle target="guest-navigation"/>
         <b-collapse is-nav id="guest-navigation">
           <b-navbar-nav class="ml-auto">
@@ -16,8 +20,12 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import Sidebar from '../sidevar/sidevar'
   export default Vue.extend({
-    name: 'guest-nav'
+    name: 'GuestNav',
+    components: {
+      Sidebar
+    }
   })
 </script>
 

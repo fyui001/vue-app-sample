@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import GuestNav from '../components/navbar/guest-nav.vue'
+  import GuestNav from './partials/navbar/guest-nav.vue'
 
   export default Vue.extend({
     name: 'Guest',
