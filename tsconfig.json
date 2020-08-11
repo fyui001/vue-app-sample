@@ -8,19 +8,25 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "types": [
       "webpack-env",
       "jest"
     ],
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
     "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "es2019",
+      "es2020",
+      "dom",
       "esnext",
       "dom",
       "dom.iterable",

@@ -19,7 +19,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/base',
     'plugin:vue/strongly-recommended',
-    'standard',
     'prettier',
     'prettier/vue',
   ],
@@ -34,7 +33,6 @@ module.exports = {
     // allow debugger during development
     'no-return-await': 'off',
     'no-console': 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/explicit-function-return-type' : 'off',
     '@typescript-eslint/no-explicit-any': 'off',
