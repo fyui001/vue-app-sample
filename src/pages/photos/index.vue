@@ -1,8 +1,8 @@
 <template>
-  <div class="photo">
+  <div class="photo-list">
     <div class="loading-view-container" v-if="isLoading">
-      <div class="loading-view-description text-center">
-        <b-spinner class="loading-spinner" variant="light" type="grow" />
+      <div class="loading-view">
+        <b-spinner animation="grow" variant="info" />
         <p class="loading-text">Loading Now...</p>
       </div>
     </div>
@@ -64,48 +64,33 @@
 </script>
 
 <style lang="scss" scoped>
-  .loading-view-container {
-    position: fixed;
-    top: 0;
-    left:0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #17a2b8;
-    .loading-view-description {
+  .photo-list {
+    .loading-view-container {
+      left: 50%;
+      padding-top: 50px;
       text-align: center;
-      .loading-spinner {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .loading-text {
-        color: white;
-      }
+      font-size: 20px;
     }
-  }
-  .photo-list-wrapper {
-    margin-top: 20px;
-
-  }
-  .photo-list-wrapper .photo-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-  .photo-list-wrapper .photo-list .card {
-    padding: 5px;
-    text-align: center;
-    flex: auto;
-    max-width: 20rem;
-    margin: 10px;
-    .card-body {
-      padding: 10px;
-    }
-    .card-text {
+    .photo-list-wrapper {
       margin-top: 20px;
+    }
+    .photo-list-wrapper .photo-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .photo-list-wrapper .photo-list .card {
+      padding: 5px;
+      text-align: center;
+      flex: auto;
+      max-width: 20rem;
+      margin: 10px;
+      .card-body {
+        padding: 10px;
+      }
+      .card-text {
+        margin-top: 20px;
+      }
     }
   }
 </style>
