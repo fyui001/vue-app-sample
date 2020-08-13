@@ -1,6 +1,5 @@
 <template>
-  <div class="main">
-    <guest />
+  <div class="home">
     <b-container>
       <div class="carousel">
         <b-carousel
@@ -38,19 +37,15 @@
       </div>
     </b-container>
   </div>
-
 </template>
 
 <script>
   import Vue from 'vue'
-  import Guest from '../layouts/guest.vue'
   import '../assets/img-1.jpg'
   import '../assets/img-2.jpg'
   import '../assets/img-3.jpg'
   import '../assets/img-4.jpg'
   import '../assets/img-5.jpg'
-  import '../assets/img-6.jpg'
-  import '../assets/img-7.jpg'
 
   export default Vue.extend({
     name: 'Home',
@@ -59,9 +54,6 @@
         slide: 0,
         sliding: null,
       }
-    },
-    components: {
-      Guest
     },
     methods: {
       onSlideStart(slide) {

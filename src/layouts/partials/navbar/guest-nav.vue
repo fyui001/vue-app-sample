@@ -11,7 +11,7 @@
         <b-navbar-toggle target="guest-navigation"/>
         <b-collapse is-nav id="guest-navigation">
           <b-navbar-nav class="ml-auto">
-            <b-nav-item to="/login" right>Login</b-nav-item>
+            <b-nav-item to="/photos/upload/" right>写真を共有</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import Sidebar from '../sidevar/sidevar'
+  import Sidebar from '../sidevar/sidevar.vue'
   export default Vue.extend({
     name: 'GuestNav',
     components: {

@@ -1,5 +1,4 @@
 export default interface UserStateType {
-  userId: string;
-  name: string;
-  accessToken: string;
+  userId: string
+  name: string
 }
