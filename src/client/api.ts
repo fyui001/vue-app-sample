@@ -5,6 +5,12 @@ export interface SendCredential {
   password: string;
 }
 
+export interface SendPhotoData {
+  title: string;
+  image: any[];
+  content: string;
+}
+
 export interface LoginResponse {
   data: {
     id: number;
@@ -20,10 +26,46 @@ export interface BearerAuthenticationResponse {
     user_id: string;
     name: string;
   }
+  refresh_token?: string
 }
 
-export interface SendAccessToken {
-  accessToken: string;
+export interface FetchPhotoListResponse {
+  status: boolean
+  data: {
+    current_page: number
+    data: {
+      id: number
+      title: string
+      content: string
+      image_url: string
+      user_id: number
+      del_flg: number
+      created_at: string
+      updated_at: string
+      user: {
+        id: number
+        user_id: string
+        name: string
+        created_at: string
+        updated_at: string
+      }
+    }[]
+    first_page_url: string
+    from: number
+    last_page: number
+    last_page_url: string
+    next_page_url: string
+    path: string
+    per_page: number
+    prev_page_url?: string
+    to: number
+    total: number
+  }
+}
+
+export interface PostPhotoDataResponse {
+  status: boolean;
+  msg: string;
 }
 
 export default class ApiRequest {
@@ -32,19 +74,57 @@ export default class ApiRequest {
     const result = await axios({
       method: 'POST',
       url: 'http://sapi.localhost/api/users/login',
+      headers: {
+        //'content-type': 'multipart/form-data',
+      },
       data: credential
     })
     return result.data
   }
 
-  static async bearerAuthentication(accessToken: SendAccessToken): Promise<BearerAuthenticationResponse> {
+  static async bearerAuthentication(accessToken: string): Promise<BearerAuthenticationResponse> {
     const result = await axios({
       method: 'GET',
-      url: 'http://sapi.localhost/api/users',
+      url: 'http://sapi.localhost/api/users/',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
       }
+    })
+    return result.data
+  }
+
+  static async fetchPhotoLists({
+    page
+  }: {
+    page: number
+  }): Promise<FetchPhotoListResponse> {
+    const result = await axios({
+      method: 'GET',
+      url: 'http://sapi.localhost/api/photos',
+      params: {
+        page
+      }
+    })
+    return result.data
+  }
+
+  static async fetchPhoto(id: number) {
+    const results = await axios({
+      method: 'GET',
+      url: `http://sapi.localhost/api/photos/${id}`
+    })
+    return results.data
+  }
+
+  static async postPhoto(postData: SendPhotoData, accessToken: string): Promise<PostPhotoDataResponse> {
+    const result = await axios({
+      method: 'POST',
+      url: 'http://sapi.localhost/api/photos/create',
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+      data: postData
     })
     return result.data
   }

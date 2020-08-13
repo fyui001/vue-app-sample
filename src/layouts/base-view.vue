@@ -7,7 +7,7 @@
   import GuestNav from './partials/navbar/guest-nav.vue'
 
   export default Vue.extend({
-    name: 'Guest',
+    name: 'BaseView',
     components: {
       GuestNav
     }

@@ -1,6 +1,5 @@
 <template>
-  <div class="main">
-    <guest />
+  <div class="login">
     <b-container>
       <b-card
         class="mb-2"
@@ -36,7 +35,6 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import Guest from '../layouts/guest.vue'
   import UserVuexModule from '../store/UserModule'
 
   export default Vue.extend({
@@ -47,9 +45,6 @@
         password: '',
         submitting: false,
       }
-    },
-    components: {
-      Guest
     },
     methods:{
       async handleLogin() {

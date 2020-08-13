@@ -22,6 +22,15 @@ export function createRouter() {
         name: 'secret',
         component: async () => await import('../pages/secret.vue'),
         meta: { auth: true },
+      }, {
+        path: '/photos',
+        component: async() => await import ('../pages/photos/index.vue'),
+      }, {
+        path: '/photos/upload/',
+        component: async () => await import ('../pages/photos/create.vue')
+      }, {
+        path: '/photos/show/:id',
+        component: async () => await import ('../pages/photos/show.vue')
       }
     ],
     mode: 'history',
