@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="guest-nav">
     <b-navbar type="dark" variant="info" toggleable="lg">
       <b-button v-b-toggle.sidebar-backdrop variant="info">
         <b-icon icon="list"></b-icon>
@@ -11,7 +11,7 @@
         <b-navbar-toggle target="guest-navigation"/>
         <b-collapse is-nav id="guest-navigation">
           <b-navbar-nav class="ml-auto">
-            <b-nav-item to="/photos/upload/" right>写真を共有</b-nav-item>
+            <b-nav-item to="/login" right>Login</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
     </b-navbar>

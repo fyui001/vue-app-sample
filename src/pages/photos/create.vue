@@ -107,7 +107,6 @@
           }
           await this.$router.push('/photos')
         } catch(e) {
-          console.log(e)
           this.submitting = false
           this.response.failure = true
         }

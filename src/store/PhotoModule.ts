@@ -1,6 +1,6 @@
 import { Mutation, Action, VuexModule, getModule, Module } from 'vuex-module-decorators'
 import { Store } from 'vuex'
-import RootState from './store'
+import { RootState }from './store'
 import PhotoStateType from '../modules/Photo'
 import ApiRequest, { FetchPhotoListResponse, SendPhotoData } from '../client/api'
 
@@ -79,7 +79,7 @@ const PhotoVuexModule = (store?: Store<RootState>) => getModule(PhotoModuleClass
 export default PhotoVuexModule
 
 export function registerPhotoModule(store: Store<RootState>) {
-  if (!store.state.PhotoStore) {
+  if (!store.state.PhotoModuleStore) {
     store.registerModule('PhotoModuleStore', PhotoModuleClass)
   }
 }

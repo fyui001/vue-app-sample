@@ -27,7 +27,8 @@ export function createRouter() {
         component: async() => await import ('../pages/photos/index.vue'),
       }, {
         path: '/photos/upload/',
-        component: async () => await import ('../pages/photos/create.vue')
+        component: async () => await import ('../pages/photos/create.vue'),
+        meta: { auth: true },
       }, {
         path: '/photos/show/:id',
         component: async () => await import ('../pages/photos/show.vue')
@@ -37,7 +38,7 @@ export function createRouter() {
   })
   router.beforeEach((to, from, next) => {
     if (to.meta.auth) {
-      UserVuexModule(store).isLogin().then(() => {
+      UserVuexModule(store).isLoginCheckAction().then(() => {
         next()
       }).catch(() => {
         next({ path: '/login' })

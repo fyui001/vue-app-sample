@@ -20,6 +20,10 @@ export interface LoginResponse {
   }
 }
 
+export interface LogoutResponse {
+  status: boolean
+}
+
 export interface BearerAuthenticationResponse {
   data: {
     id: number;
@@ -74,12 +78,20 @@ export default class ApiRequest {
     const result = await axios({
       method: 'POST',
       url: 'http://sapi.localhost/api/users/login',
-      headers: {
-        //'content-type': 'multipart/form-data',
-      },
       data: credential
     })
     return result.data
+  }
+
+  static async postLogoutAction(accessToken: string): Promise<LogoutResponse> {
+    const result = await axios({
+      method: 'GET',
+      url: 'http://sapi.localhost/api/users/logout',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    })
+    return result.data.status
   }
 
   static async bearerAuthentication(accessToken: string): Promise<BearerAuthenticationResponse> {
@@ -123,6 +135,7 @@ export default class ApiRequest {
       url: 'http://sapi.localhost/api/photos/create',
       headers: {
         'content-type': 'multipart/form-data',
+        'Authorization': `Bearer ${accessToken}`,
       },
       data: postData
     })

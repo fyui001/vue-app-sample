@@ -14,13 +14,13 @@
         <b-form @submit.prevent="handleLogin">
           <b-input-group class="mb-2" size="sm">
             <b-input-group-prepend is-text>
-              <b-icon icon="person-fill"></b-icon>
+              <b-icon icon="person-fill" />
               </b-input-group-prepend>
             <b-input v-model="user_id" type="text" placeholder="User ID" :disabled="submitting" />
           </b-input-group>
           <b-input-group class="mb-2" size="sm">
             <b-input-group-prepend is-text>
-              <b-icon icon="shield-lock-fill"></b-icon>
+              <b-icon icon="shield-lock-fill" />
                 </b-input-group-prepend>
               <b-input v-model="password" type="password" placeholder="Password" :disabled="submitting" />
           </b-input-group>
@@ -53,7 +53,7 @@
           user_id: this.user_id,
           password: this.password,
         })
-        await this.$router.push('/secret')
+        window.location.href = '/'
         this.submitting = false
       }
     }
