@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="photo-detail-wrapper">
-      <div class="loading-failed" v-if="isLoadingFailed">
+      <div class="loading-failed" v-if="isLoadingFailed && !isLoading">
         <b-alert show variant="danger">読み込みに失敗しました</b-alert>
       </div>
       <div class="detail-wrapper">
@@ -35,22 +35,23 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import Vue from 'vue'
   import PhotoVuexModule from '../../store/PhotoModule'
+
   export default  Vue.extend({
     name: "PhotoShow",
     data() {
       return {
         isLoading: false,
         isLoadingFailed: false,
-        photo: {}
+        photo: {},
       }
     },
     async created() {
       try {
         this.isLoading = true
-        await PhotoVuexModule(this.$store).fetchPhoto(this.$route.params.id)
+        await PhotoVuexModule(this.$store).fetchPhoto(<number><unknown>this.$route.params.id)
         this.photo = PhotoVuexModule(this.$store).photo
         this.isLoading = false
       } catch(e) {
@@ -104,7 +105,6 @@
           width: 100%;
           height: 100%;
           margin: auto;
-          //text-align: center;
           .image {
             max-width: 100%;
             height: auto;

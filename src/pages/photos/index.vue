@@ -55,8 +55,8 @@
       }
     },
     methods: {
-      showDetail(id: any) {
-        this.$router.push({path: `photos/show/${id}`)
+      showDetail(id: number) {
+        this.$router.push({path: `photos/show/${id}`})
       }
     },
   })

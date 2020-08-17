@@ -1,13 +1,26 @@
 import { Mutation, Action, VuexModule, getModule, Module } from 'vuex-module-decorators'
 import { Store } from 'vuex'
 import { RootState }from './store'
-import PhotoStateType from '../modules/Photo'
+import PhotoStateType, { PhotoListStateType } from '../modules/Photo'
 import ApiRequest, { FetchPhotoListResponse, SendPhotoData } from '../client/api'
 
 @Module({name: 'PhotoModuleStore', namespaced: true, stateFactory: true})
 export class PhotoModuleClass extends VuexModule {
 
-  photoList: FetchPhotoListResponse[] = []
+  photoList: PhotoListStateType = {
+    current_page: 0,
+    data: [],
+    first_page_url: '',
+    from: 0,
+    last_page: 0,
+    last_page_url: '',
+    next_page_url: '',
+    path: '',
+    per_page: 0,
+    prev_page_url: '',
+    to: 0,
+    total: 0,
+  }
 
   photo: PhotoStateType = {
     id: 0,
@@ -33,7 +46,7 @@ export class PhotoModuleClass extends VuexModule {
   }
 
   @Mutation
-  public SET_PHOTO_LIST(param: FetchPhotoListResponse[]) {
+  public SET_PHOTO_LIST(param: PhotoListStateType) {
     this.photoList = param
     this.loaded.photoListLoaded = true
   }

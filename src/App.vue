@@ -7,7 +7,7 @@
 <script lang="ts">
   import Vue from 'vue'
   import BaseView from './layouts/base-view.vue'
-  import UserVuexModule from "@/store/UserModule";
+  import UserVuexModule from './store/UserModule'
 
   export default Vue.component('App', {
     data() {

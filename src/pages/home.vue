@@ -39,7 +39,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import Vue from 'vue'
   import '../assets/img-1.jpg'
   import '../assets/img-2.jpg'
