@@ -4,6 +4,7 @@ const path = require('path')
 const rm = require('rimraf')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
 }
@@ -95,6 +96,7 @@ module.exports = {
       template: './public/index.html',
       inject: true
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new Dotenv({ systemvars: false }),
   ]
 }

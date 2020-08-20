@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API_BASE_URL } from '../config/config'
 
 export interface SendCredential {
   user_id: string;
@@ -77,7 +78,7 @@ export default class ApiRequest {
   static async postLoginRequest(credential: SendCredential): Promise<LoginResponse> {
     const result = await axios({
       method: 'POST',
-      url: 'http://sapi.localhost/api/users/login',
+      url: `${API_BASE_URL}/api/users/login`,
       data: credential
     })
     return result.data
@@ -86,7 +87,7 @@ export default class ApiRequest {
   static async postLogoutAction(accessToken: string): Promise<LogoutResponse> {
     const result = await axios({
       method: 'GET',
-      url: 'http://sapi.localhost/api/users/logout',
+      url: `${API_BASE_URL}/api/users/logout`,
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       },
@@ -97,7 +98,7 @@ export default class ApiRequest {
   static async bearerAuthentication(accessToken: string): Promise<BearerAuthenticationResponse> {
     const result = await axios({
       method: 'GET',
-      url: 'http://sapi.localhost/api/users/',
+      url: `${API_BASE_URL}/api/users/`,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
@@ -113,7 +114,7 @@ export default class ApiRequest {
   }): Promise<FetchPhotoListResponse> {
     const result = await axios({
       method: 'GET',
-      url: 'http://sapi.localhost/api/photos',
+      url: `${API_BASE_URL}/api/photos`,
       params: {
         page
       }
@@ -124,7 +125,7 @@ export default class ApiRequest {
   static async fetchPhoto(id: number) {
     const results = await axios({
       method: 'GET',
-      url: `http://sapi.localhost/api/photos/${id}`
+      url: `${API_BASE_URL}/api/photos/${id}`
     })
     return results.data
   }
@@ -132,7 +133,7 @@ export default class ApiRequest {
   static async postPhoto(postData: SendPhotoData, accessToken: string): Promise<PostPhotoDataResponse> {
     const result = await axios({
       method: 'POST',
-      url: 'http://sapi.localhost/api/photos/create',
+      url: `${API_BASE_URL}/api/photos/create`,
       headers: {
         'content-type': 'multipart/form-data',
         'Authorization': `Bearer ${accessToken}`,
