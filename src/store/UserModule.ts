@@ -12,7 +12,7 @@ export class UserModuleClass extends VuexModule {
     name: '',
   }
 
-  isLogin: boolean = false
+  public isLogin: boolean = false
 
   @Mutation
   public SET_USER(param: UserStateType) {
@@ -27,12 +27,13 @@ export class UserModuleClass extends VuexModule {
   @Action
   public async loginAction(credential: SendCredential) {
     const result = await ApiRequest.postLoginRequest(credential)
-    if (result.data !== undefined) {
+    if (result.status) {
       document.cookie = 'access_token=' + result.data.access_token + ';'
       this.SET_USER({
         userId: result.data.user_id,
         name: result.data.name,
       })
+      this.SET_IS_LOGIN(true)
     }
   }
 
@@ -62,15 +63,16 @@ export class UserModuleClass extends VuexModule {
         accessToken = keyValue[1]
       }
     }
-    await ApiRequest.bearerAuthentication(accessToken).then((result) => {
+
+    const result = await ApiRequest.bearerAuthentication(accessToken)
+
+    if (result.status) {
       this.SET_USER({
         userId: result.data.user_id,
         name: result.data.name
       })
       this.SET_IS_LOGIN(true)
-    }).catch(() => {
-      throw false
-    })
+    }
 
   }
 

@@ -12,26 +12,38 @@ export interface SendPhotoData {
   content: string;
 }
 
-export interface LoginResponse {
+export interface LoginResponseSuccess {
+  status: boolean
   data: {
-    id: number;
-    user_id: string;
-    name: string;
-    access_token: string;
+    id: number
+    user_id: string
+    name: string
+    access_token: string
   }
+}
+
+export interface LoginResponseError {
+  status: boolean
+  msg: string
 }
 
 export interface LogoutResponse {
   status: boolean
 }
 
-export interface BearerAuthenticationResponse {
+export interface BearerAuthenticationResponseSuccess {
+  status: boolean
   data: {
     id: number;
     user_id: string;
     name: string;
   }
   refresh_token?: string
+}
+
+export interface BearerAuthenticationResponseError {
+  status: boolean
+  msg: string
 }
 
 export interface FetchPhotoListResponse {
@@ -75,7 +87,7 @@ export interface PostPhotoDataResponse {
 
 export default class ApiRequest {
 
-  static async postLoginRequest(credential: SendCredential): Promise<LoginResponse> {
+  static async postLoginRequest(credential: SendCredential): Promise<LoginResponseSuccess|LoginResponseError> {
     const result = await axios({
       method: 'POST',
       url: `${API_BASE_URL}/api/users/login`,
@@ -95,7 +107,7 @@ export default class ApiRequest {
     return result.data.status
   }
 
-  static async bearerAuthentication(accessToken: string): Promise<BearerAuthenticationResponse> {
+  static async bearerAuthentication(accessToken: string): Promise<BearerAuthenticationResponseSuccess|BearerAuthenticationResponseError> {
     const result = await axios({
       method: 'GET',
       url: `${API_BASE_URL}/api/users/`,

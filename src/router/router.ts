@@ -39,6 +39,9 @@ export function createRouter() {
   router.beforeEach((to, from, next) => {
     if (to.meta.auth) {
       UserVuexModule(store).isLoginCheckAction().then(() => {
+        if (!UserVuexModule(store).isLogin) {
+          next({ path: '/login' })
+        }
         next()
       }).catch(() => {
         next({ path: '/login' })

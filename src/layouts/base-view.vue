@@ -22,8 +22,7 @@
       GuestNav,
       AuthNav,
     },
-    created() {
-      UserVuexModule(this.$store).isLoginCheckAction()
+    async created() {
       this.isLogin = UserVuexModule(this.$store).isLogin
     },
   })
