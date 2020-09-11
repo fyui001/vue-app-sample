@@ -27,25 +27,25 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
+import Vue from 'vue'
 
-  export default Vue.extend({
-    name: 'Sidebar'
-  })
+export default Vue.extend({
+  name: 'Sidebar',
+})
 </script>
 
 <style scoped lang="scss">
-  .side-menu-list {
-    list-style: none;
-    font-size: 20px;
-    margin-top: 20px;
+.side-menu-list {
+  list-style: none;
+  font-size: 20px;
+  margin-top: 20px;
+  text-decoration: none;
+  .link {
     text-decoration: none;
-    .link {
-      text-decoration: none;
-    }
   }
-  .menu {
-    color: darkgray;
-    margin-top: 20px;
-  }
+}
+.menu {
+  color: darkgray;
+  margin-top: 20px;
+}
 </style>

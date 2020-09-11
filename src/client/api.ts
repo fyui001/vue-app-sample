@@ -1,15 +1,15 @@
 import axios from 'axios'
-import { API_BASE_URL } from '../config/config'
+import { API_BASE_URL } from '@/config/config'
 
 export interface SendCredential {
-  user_id: string;
-  password: string;
+  user_id: string
+  password: string
 }
 
 export interface SendPhotoData {
-  title: string;
-  image: any[];
-  content: string;
+  title: string
+  image: any[]
+  content: string
 }
 
 export interface LoginResponseSuccess {
@@ -34,9 +34,9 @@ export interface LogoutResponse {
 export interface BearerAuthenticationResponseSuccess {
   status: boolean
   data: {
-    id: number;
-    user_id: string;
-    name: string;
+    id: number
+    user_id: string
+    name: string
   }
   refresh_token?: string
 }
@@ -81,17 +81,16 @@ export interface FetchPhotoListResponse {
 }
 
 export interface PostPhotoDataResponse {
-  status: boolean;
-  msg: string;
+  status: boolean
+  msg: string
 }
 
 export default class ApiRequest {
-
-  static async postLoginRequest(credential: SendCredential): Promise<LoginResponseSuccess|LoginResponseError> {
+  static async postLoginRequest(credential: SendCredential): Promise<LoginResponseSuccess | LoginResponseError> {
     const result = await axios({
       method: 'POST',
       url: `${API_BASE_URL}/api/users/login`,
-      data: credential
+      data: credential,
     })
     return result.data
   }
@@ -101,35 +100,33 @@ export default class ApiRequest {
       method: 'GET',
       url: `${API_BASE_URL}/api/users/logout`,
       headers: {
-        'Authorization': `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
     return result.data.status
   }
 
-  static async bearerAuthentication(accessToken: string): Promise<BearerAuthenticationResponseSuccess|BearerAuthenticationResponseError> {
+  static async bearerAuthentication(
+    accessToken: string
+  ): Promise<BearerAuthenticationResponseSuccess | BearerAuthenticationResponseError> {
     const result = await axios({
       method: 'GET',
       url: `${API_BASE_URL}/api/users/`,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
-      }
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
     return result.data
   }
 
-  static async fetchPhotoLists({
-    page
-  }: {
-    page: number
-  }): Promise<FetchPhotoListResponse> {
+  static async fetchPhotoLists({ page }: { page: number }): Promise<FetchPhotoListResponse> {
     const result = await axios({
       method: 'GET',
       url: `${API_BASE_URL}/api/photos`,
       params: {
-        page
-      }
+        page,
+      },
     })
     return result.data
   }
@@ -137,7 +134,7 @@ export default class ApiRequest {
   static async fetchPhoto(id: number) {
     const results = await axios({
       method: 'GET',
-      url: `${API_BASE_URL}/api/photos/${id}`
+      url: `${API_BASE_URL}/api/photos/${id}`,
     })
     return results.data
   }
@@ -148,11 +145,10 @@ export default class ApiRequest {
       url: `${API_BASE_URL}/api/photos/create`,
       headers: {
         'content-type': 'multipart/form-data',
-        'Authorization': `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
-      data: postData
+      data: postData,
     })
     return result.data
   }
-
 }

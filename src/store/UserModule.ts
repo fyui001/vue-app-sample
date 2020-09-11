@@ -2,17 +2,16 @@ import { Mutation, Action, VuexModule, getModule, Module } from 'vuex-module-dec
 import { Store } from 'vuex'
 import { RootState } from './store'
 import UserStateType from '../modules/User'
-import ApiRequest, {SendCredential} from '../client/api'
+import ApiRequest, { SendCredential } from '../client/api'
 
-@Module({name: 'UserModuleStore', namespaced: true, stateFactory: true})
+@Module({ name: 'UserModuleStore', namespaced: true, stateFactory: true })
 export class UserModuleClass extends VuexModule {
-
   user: UserStateType = {
     userId: '',
     name: '',
   }
 
-  public isLogin: boolean = false
+  public isLogin = false
 
   @Mutation
   public SET_USER(param: UserStateType) {
@@ -44,7 +43,7 @@ export class UserModuleClass extends VuexModule {
     const cookiesArray = cookies.split('; ')
     for (const c of cookiesArray) {
       const keyValue = c.split('=')
-      if ( keyValue[0] === 'access_token') {
+      if (keyValue[0] === 'access_token') {
         accessToken = keyValue[1]
       }
     }
@@ -53,13 +52,12 @@ export class UserModuleClass extends VuexModule {
 
   @Action
   public async isLoginCheckAction() {
-
     let accessToken = ''
     const cookies = document.cookie
     const cookiesArray = cookies.split('; ')
     for (const c of cookiesArray) {
       const keyValue = c.split('=')
-      if ( keyValue[0] === 'access_token') {
+      if (keyValue[0] === 'access_token') {
         accessToken = keyValue[1]
       }
     }
@@ -69,13 +67,11 @@ export class UserModuleClass extends VuexModule {
     if (result.status) {
       this.SET_USER({
         userId: result.data.user_id,
-        name: result.data.name
+        name: result.data.name,
       })
       this.SET_IS_LOGIN(true)
     }
-
   }
-
 }
 
 const UserVuexModule = (store?: Store<RootState>) => getModule(UserModuleClass, store)

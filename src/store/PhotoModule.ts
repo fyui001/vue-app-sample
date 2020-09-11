@@ -1,12 +1,11 @@
 import { Mutation, Action, VuexModule, getModule, Module } from 'vuex-module-decorators'
 import { Store } from 'vuex'
-import { RootState }from './store'
+import { RootState } from './store'
 import PhotoStateType, { PhotoListStateType } from '../modules/Photo'
-import ApiRequest, { FetchPhotoListResponse, SendPhotoData } from '../client/api'
+import ApiRequest, { SendPhotoData } from '../client/api'
 
-@Module({name: 'PhotoModuleStore', namespaced: true, stateFactory: true})
+@Module({ name: 'PhotoModuleStore', namespaced: true, stateFactory: true })
 export class PhotoModuleClass extends VuexModule {
-
   photoList: PhotoListStateType = {
     current_page: 0,
     data: [],
@@ -37,12 +36,12 @@ export class PhotoModuleClass extends VuexModule {
       name: '',
       created_at: '',
       updated_at: '',
-    }
+    },
   }
 
   loaded = {
     photoListLoaded: false,
-    photoLoaded: false
+    photoLoaded: false,
   }
 
   @Mutation
@@ -58,8 +57,8 @@ export class PhotoModuleClass extends VuexModule {
   }
 
   @Action
-  public async fetchPhotoList(page: number = 1) {
-    const result = await ApiRequest.fetchPhotoLists({page})
+  public async fetchPhotoList(page = 1) {
+    const result = await ApiRequest.fetchPhotoLists({ page })
     this.SET_PHOTO_LIST(result.data)
   }
 
@@ -71,13 +70,12 @@ export class PhotoModuleClass extends VuexModule {
 
   @Action
   public async postPhotoAction(request: SendPhotoData) {
-
-    let accessToken: string = ''
-    const cookies = document.cookie
-    const cookiesArray = cookies.split('; ')
+    let accessToken = ''
+    const cookies: string = document.cookie
+    const cookiesArray: string[] = cookies.split('; ')
     for (const c of cookiesArray) {
-      const keyValue = c.split('=')
-      if ( keyValue[0] === 'access_token') {
+      const keyValue: string[] = c.split('=')
+      if (keyValue[0] === 'access_token') {
         accessToken = keyValue[1]
       }
     }
@@ -85,7 +83,6 @@ export class PhotoModuleClass extends VuexModule {
     const result = await ApiRequest.postPhoto(request, accessToken)
     return result.status
   }
-
 }
 
 const PhotoVuexModule = (store?: Store<RootState>) => getModule(PhotoModuleClass, store)

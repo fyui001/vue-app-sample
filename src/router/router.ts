@@ -12,40 +12,48 @@ export function createRouter() {
       {
         path: '/',
         name: 'home',
-        component: async () => await import ('../pages/home.vue')
-      }, {
+        component: async () => await import('../pages/home.vue'),
+      },
+      {
         path: '/login',
         name: 'login',
-        component: async () => await import ('../pages/login.vue')
-      }, {
+        component: async () => await import('../pages/login.vue'),
+      },
+      {
         path: '/secret',
         name: 'secret',
         component: async () => await import('../pages/secret.vue'),
         meta: { auth: true },
-      }, {
+      },
+      {
         path: '/photos',
-        component: async() => await import ('../pages/photos/index.vue'),
-      }, {
+        component: async () => await import('../pages/photos/index.vue'),
+      },
+      {
         path: '/photos/upload/',
-        component: async () => await import ('../pages/photos/create.vue'),
+        component: async () => await import('../pages/photos/create.vue'),
         meta: { auth: true },
-      }, {
+      },
+      {
         path: '/photos/show/:id',
-        component: async () => await import ('../pages/photos/show.vue')
-      }
+        component: async () => await import('../pages/photos/show.vue'),
+      },
     ],
     mode: 'history',
   })
   router.beforeEach((to, from, next) => {
     if (to.meta.auth) {
-      UserVuexModule(store).isLoginCheckAction().then(() => {
-        if (!UserVuexModule(store).isLogin) {
+      UserVuexModule(store)
+        .isLoginCheckAction()
+        .then(() => {
+          if (!UserVuexModule(store).isLogin) {
+            next({ path: '/login' })
+          }
+          next()
+        })
+        .catch(() => {
           next({ path: '/login' })
-        }
-        next()
-      }).catch(() => {
-        next({ path: '/login' })
-      })
+        })
     } else {
       next()
     }
