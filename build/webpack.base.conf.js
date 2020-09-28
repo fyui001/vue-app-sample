@@ -18,6 +18,9 @@ module.exports = {
     path: resolve('dist'),
     publicPath: '/'
   },
+  node: {
+    setImmediate: false
+  },
   entry: {
     app: './src/main.ts'
   },
