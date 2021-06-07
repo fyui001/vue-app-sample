@@ -18,9 +18,6 @@ module.exports = {
     path: resolve('dist'),
     publicPath: '/'
   },
-  node: {
-    setImmediate: false
-  },
   entry: {
     app: './src/main.ts'
   },
@@ -41,20 +38,23 @@ module.exports = {
           {
             loader: 'thread-loader',
             options: {
-              workers: require('os').cpus().length - 1
-            }
+              workers: require('os').cpus().length - 1,
+            },
           },
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
           },
           {
             loader: 'ts-loader',
             options: {
               appendTsSuffixTo: [/\.vue$/],
-              happyPackMode: true
-            }
-          }
-        ]
+              happyPackMode: true,
+              compilerOptions: {
+                module: 'esnext',
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.vue$/,
@@ -68,16 +68,16 @@ module.exports = {
             // other preprocessors should work out of the box, no loader config like this necessary.
             scss: 'vue-style-loader!css-loader!postcss-loader!sass-loader',
             sass: 'vue-style-loader!css-loader!postcss-loader!sass-loader?indentedSyntax',
-            css: 'vue-style-loader!css-loader!postcss-loader'
-          }
+            css: 'vue-style-loader!css-loader!postcss-loader',
+          },
           // other vue-loader options go here
-        }
+        },
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         }
       },
       {
@@ -86,7 +86,8 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: 'img/[name].[ext]'
+            name: 'img/[name].[ext]',
+            esModule: false,
           }
         }
       }
